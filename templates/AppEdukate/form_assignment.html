@@ -1,0 +1,115 @@
+{% extends "AppEdukate/detail.html" %}
+{% load static %}
+
+
+
+{% block Navbar %}
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{% url 'AppEdukateIndex' %}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link">Home</a>
+                    <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link">Courses</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item">Course Detail</a>
+                            <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item">Our Features</a>
+                            <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
+                            <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
+                            <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item">Students</a>
+                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
+                        </div>
+                    </div>
+                    <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="nav-link dropdown">
+                    <a class="btn btn-primary py-2 px-4 d-none d-lg-block nav-link dropdown-toggle" data-toggle="dropdown">Join Us</a>
+                    <div class="nav-item dropdown">
+                        <div class="dropdown-menu text-center m-0">
+                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Students</a>
+                            <div class="nav-item m-0 dropdown">
+                                <div>
+                                    <a href="{% url 'AppEdukateFormStudents' %}" class="dropdown-menu-lg-left">New Student</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'AppEdukateFormAssignments' %}" class="dropdown-menu-lg-left active">Assignment</a>
+                                </div>
+                            </div>
+                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Teachers</a>
+                            <div class="nav-item m-0 dropdown">
+                                <div>
+                                    <a href="{% url 'AppEdukateFormTeachers' %}" class="dropdown-item-lg-left">New Teachers</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'AppEdukateFormCourses' %}" class="dropdown-item-lg-left">New Courses</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+{% endblock %}
+
+
+{% block Header %}
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">Submit Assignments</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Submit Assignments</p>
+                </div>
+            {% block successful_uploaded %}
+                {% if my_form.errors %}
+                    <p style="color:#940f29;">Incorrect Data, Check Again</p>
+                {% endif %}
+                <form action="{% url 'AppEdukateFormAssignments' %}" method="POST">{% csrf_token %}
+                    <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+                        <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                            <div class="input-group">
+                                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Name" id="search-input-1" name="name">
+                                <div class="input-group">
+                                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Last Name" id="search-input-2" name="last_name">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Course" id="search-input-3" name="course">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Commission" id="search-input-4" name="commission">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Enter Assignment Date DD/MM/YYYY" id="search-input-5" name="assignment_date">
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <label class="form-check-label" for="checkbox-input-1" style="transform: scale(1.5); float: right; color: white; margin-left: 1px;">Is Complete?</label>
+                                                <input class="form-check-input" type="checkbox" id="checkbox-input-1" name="assignment"
+                                                       style="transform: scale(2.5); float: right; margin-left: 140px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group-append text-center">
+                                <button type="submit" class="btn btn-secondary px-4 px-lg-5">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

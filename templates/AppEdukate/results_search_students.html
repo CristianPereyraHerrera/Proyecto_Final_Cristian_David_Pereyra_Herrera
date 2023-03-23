@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students Search Result</title>
+</head>
+<body>
+    {% if students %}
+        <p>Search Result: {{ students.name }} {{ students.last_name }} {{ students.email }}</p>
+        <ul>
+        {% for student in students %}
+           <p><li> Name: {{ student.name }} </li>
+            <li> Last Name: {{ student.last_name }} </li>
+            <li> Email: {{ student.email }} </li></p>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
