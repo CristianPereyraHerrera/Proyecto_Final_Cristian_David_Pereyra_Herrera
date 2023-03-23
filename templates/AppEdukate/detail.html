@@ -27,45 +27,21 @@
                             <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
-                            <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item">Students</a>
-                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
-                        </div>
-                    </div>
-                    <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class="nav-link dropdown">
-                    <a class="btn btn-primary py-2 px-4 d-none d-lg-block nav-link dropdown-toggle" data-toggle="dropdown">Join Us</a>
-                    <div class="nav-item dropdown">
-                        <div class="dropdown-menu text-center m-0">
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Students</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormStudents' %}" class="dropdown-menu-lg-left">New Student</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormAssignments' %}" class="dropdown-menu-lg-left">Assignment</a>
-                                </div>
-                            </div>
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Teachers</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormTeachers' %}" class="dropdown-item-lg-left">New Teachers</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormCourses' %}" class="dropdown-item-lg-left">New Courses</a>
-                                </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
+                                <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item">Students</a>
+                                <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
                             </div>
                         </div>
+                        <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
                     </div>
-                </div>
+                    <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
             </div>
         </nav>
     </div>
-    {% endblock %}
+{% endblock %}
     <!-- Navbar End -->
 
 
@@ -95,13 +71,9 @@
                             <h1 class="display-4">Web design & development courses for beginners</h1>
                         </div>
                         <img class="img-fluid rounded w-100 mb-4" src="{% static 'AppEdukate/img/header.jpg' %}" alt="Image">
-                        <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                        <p>At our institute, we offer beginner-friendly web design and development courses that are not only informative but also enjoyable. Our students always leave with a sense of accomplishment and pride after finishing our courses. We have seen many students come in with little to no experience in web design or development, and within a short time, they start creating their own websites and applications. It's always a pleasure to see their faces light up when they realize what they are capable of achieving.</p>
 
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem.
-                            Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam
-                            consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit
-                            gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea
-                            sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.</p>
+                        <p> And the best part? We get to celebrate with them as they graduate and move on to pursue their dreams. Seeing our students happy and fulfilled makes everything worth it.</p>
                     </div>
 
                     <h2 class="mb-3">Related Courses</h2>

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from collections import defaultdict
@@ -180,20 +181,48 @@ def form_students(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_students(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['name']) > min_length and len(my_form.cleaned_data['last_name']) > min_length:
+        if my_form.is_valid() \
+                and len(my_form.cleaned_data['name']) > min_length \
+                and len(my_form.cleaned_data['last_name']) > min_length \
+                and len(my_form.cleaned_data['email']) > min_length \
+                and len(my_form.cleaned_data['username']) > 8 \
+                and len(my_form.cleaned_data['password']) > 8:
             information = my_form.cleaned_data
             student = Student(name=information['name'].lower(),
                               second_name=information['second_name'].lower(),
                               last_name=information['last_name'].lower(),
                               second_last_name=information['second_last_name'].lower(),
-                              email=information['email'].lower())
+                              email=information['email'].lower(),
+                              username=information['username'].lower(),
+                              password=information['password'])
             student.save()
             return render(request, "AppEdukate/save_form_students.html")
         else:
-            if len(my_form.cleaned_data['name']) < min_length:
+            if not my_form.cleaned_data.get('name'):
+                my_form.add_error('name', 'This field is required.')
+            elif len(my_form.cleaned_data['name']) < min_length:
                 my_form.add_error('name', f'The name must have more than {min_length} characters')
-            if len(my_form.cleaned_data['last_name']) < min_length:
+
+            if not my_form.cleaned_data.get('last_name'):
+                my_form.add_error('last_name', 'This field is required.')
+            elif len(my_form.cleaned_data['last_name']) < min_length:
                 my_form.add_error('last_name', f'The last name must have more than {min_length} characters')
+
+            if not my_form.cleaned_data.get('email'):
+                my_form.add_error('email', 'This field is required.')
+            elif len(my_form.cleaned_data['email']) < min_length:
+                my_form.add_error('email', f'The email must have more than {min_length} characters')
+
+            if not my_form.cleaned_data.get('username'):
+                my_form.add_error('username', 'This field is required.')
+            elif len(my_form.cleaned_data['username']) < 8:
+                my_form.add_error('username', 'The username must have more than 8 characters')
+
+            if not my_form.cleaned_data.get('password'):
+                my_form.add_error('password', 'This field is required.')
+            elif len(my_form.cleaned_data['password']) < 8:
+                my_form.add_error('password', 'The password must have more than 8 characters')
+
     else:
         my_form = Form_students()
     return render(request, "AppEdukate/form_students.html", {"my_form": my_form})

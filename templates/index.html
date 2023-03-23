@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fon-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="{% static 'AppEdukate/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
@@ -86,8 +86,8 @@
                             <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
                             <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
                         </div>
-                        {% block Login %}
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
                         <div class="dropdown-menu text-center m-0">
@@ -96,12 +96,17 @@
                             <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
                         </div>
                     </div>
+                    {% endif %}
                     <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
-                <a href="{% url 'logoutAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+                <div class="nav-link dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logoutAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+                    {% else %}
+                        <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
+                    {% endif %}
+                </div>
             </div>
-                            {% endblock %}
         </nav>
     </div>
     {% endblock %}
@@ -116,6 +121,9 @@
             <h1 class="text-white display-1 mb-5">Education Courses</h1>
         </div>
     </div>
+        {% block login_logout %}
+            {#########LOGIN/LOGOUT SUCCESSFUL#########}
+        {% endblock %}
     {% endblock %}
     <!-- Header End -->
 
@@ -135,7 +143,7 @@
                         <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">About Us</h6>
                         <h1 class="display-4">First Choice For Online Education Anywhere</h1>
                     </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                    <p>Join our institute for the highest quality courses in programming, marketing, and more. Our experienced instructors provide personalized attention and expert guidance to help you achieve your goals. With our internationally recognized certificates and flexible online classes, you can learn at your own pace from anywhere in the world. Enroll now and take the first step towards a successful future!"</p>
                     <div class="row pt-3 mx-0">
                         <div class="col-3 px-0">
                             <div class="bg-success text-center p-4">
@@ -180,14 +188,14 @@
                         <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Why Choose Us?</h6>
                         <h1 class="display-4">Why You Should Start Learning with Us?</h1>
                     </div>
-                    <p class="mb-4 pb-2">Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita, ipsum dolores amet voluptua duo dolores et sit ipsum rebum, sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus gubergren sit rebum clita amet.</p>
+                    <p class="mb-4 pb-2">At our institute, we provide top-notch courses in a variety of fields, including programming in Python, Java, and marketing. Our instructors are highly skilled and experienced professionals who are dedicated to helping you achieve your learning goals. With our comprehensive curriculum and personalized attention, you'll gain the knowledge and skills you need to succeed in your chosen field. Plus, our international certificate program and flexible online classes make learning more accessible than ever. So why wait? Start your journey to success with us today!</p>
                     <div class="d-flex mb-3">
                         <div class="btn-icon bg-primary mr-4">
                             <i class="fa fa-2x fa-graduation-cap text-white"></i>
                         </div>
                         <div class="mt-n1">
                             <h4>Skilled Instructors</h4>
-                            <p>Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
+                            <p> Our instructors are highly skilled and experienced in teaching programming languages such as Python and Java, as well as marketing and other courses.</p>
                         </div>
                     </div>
                     <div class="d-flex mb-3">
@@ -196,7 +204,7 @@
                         </div>
                         <div class="mt-n1">
                             <h4>International Certificate</h4>
-                            <p>Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
+                            <p> Upon completion of our courses, you will receive an internationally recognized certificate that can help you advance your career and open up new opportunities.</p>
                         </div>
                     </div>
                     <div class="d-flex">
@@ -205,7 +213,7 @@
                         </div>
                         <div class="mt-n1">
                             <h4>Online Classes</h4>
-                            <p class="m-0">Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
+                            <p class="m-0"> Our online classes are designed to be flexible and convenient, allowing you to learn from anywhere with an internet connection at your own pace.</p>
                         </div>
                     </div>
                 </div>
@@ -244,7 +252,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -259,7 +267,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -274,7 +282,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -289,7 +297,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -304,7 +312,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -319,7 +327,7 @@
                         </div>
                     </div>
                     <div class="w-100 bg-white text-center p-4" >
-                        <a class="btn btn-primary" href="detail.html">Course Detail</a>
+                        <a class="btn btn-primary" href="{% url 'AppEdukateDetail' %}">Course Detail</a>
                     </div>
                 </div>
             </div>
@@ -447,28 +455,28 @@
                         <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Testimonial</h6>
                         <h1 class="display-4">What Say Our Students</h1>
                     </div>
-                    <p class="m-0">Dolor est dolores et nonumy sit labore dolores est sed rebum amet, justo duo ipsum sanctus dolore magna rebum sit et. Diam lorem ea sea at. Nonumy et at at sed justo est nonumy tempor. Vero sea ea eirmod, elitr ea amet diam ipsum at amet. Erat sed stet eos ipsum diam</p>
+                    <p class="m-0">At our institute, we value the opinions and feedback of our students. That's why we're proud to feature our "What Say Our Students" section on our website. It's a space where our students can share their experiences and thoughts on our courses and instructors. We believe that hearing directly from our students is the best way to continually improve and provide the highest quality education possible.</p>
                 </div>
                 <div class="col-lg-7">
                     <div class="owl-carousel testimonial-carousel">
                         <div class="bg-white p-5">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <p>Sed et elitr ipsum labore dolor diam, ipsum duo vero sed sit est est ipsum eos clita est ipsum. Est nonumy tempor at kasd. Sed at dolor duo ut dolor, et justo erat dolor magna sed stet amet elitr duo lorem</p>
+                            <p>I am really grateful for Edukate's courses. They provided me with a comprehensive understanding of web development, and I was able to put my skills to use immediately after completing the program. The instructors were knowledgeable, approachable, and always available to help with any questions I had. Overall, I would highly recommend Edukate to anyone looking to improve their skills and pursue a career in web development.</p>
                             <div class="d-flex flex-shrink-0 align-items-center mt-4">
                                 <img class="img-fluid mr-4" src="{% static 'AppEdukate/img/testimonial-2.jpg' %}" alt="">
                                 <div>
-                                    <h5>Student Name</h5>
-                                    <span>Web Design</span>
+                                    <h5>Student Michael</h5>
+                                    <span>Python</span>
                                 </div>
                             </div>
                         </div>
                         <div class="bg-white p-5">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <p>Sed et elitr ipsum labore dolor diam, ipsum duo vero sed sit est est ipsum eos clita est ipsum. Est nonumy tempor at kasd. Sed at dolor duo ut dolor, et justo erat dolor magna sed stet amet elitr duo lorem</p>
+                            <p>I am very satisfied with the quality of the courses and the support provided by the team of professionals. I am confident that this experience will help me achieve my personal and professional goals. I highly recommend this institute to anyone looking to improve their skills and knowledge.</p>
                             <div class="d-flex flex-shrink-0 align-items-center mt-4">
                                 <img class="img-fluid mr-4" src="{% static 'AppEdukate/img/testimonial-1.jpg' %}" alt="">
                                 <div>
-                                    <h5>Student Name</h5>
+                                    <h5>Student Sophia</h5>
                                     <span>Web Design</span>
                                 </div>
                             </div>
@@ -561,7 +569,7 @@
                     <a href="index.html" class="navbar-brand">
                         <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
                     </a>
-                    <p class="m-0">Accusam nonumy clita sed rebum kasd eirmod elitr. Ipsum ea lorem at et diam est, tempor rebum ipsum sit ea tempor stet et consetetur dolores. Justo stet diam ipsum lorem vero clita diam</p>
+                    <p class="m-0">Unlock your potential with our programming and marketing courses. Learn Python, Java, and more from industry experts. Take your career to the next level with our practical and hands-on training.</p>
                 </div>
                 <div class="col-md-6 mb-5">
                     <h3 class="text-white mb-4">Newsletter</h3>

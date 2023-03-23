@@ -37,35 +37,11 @@
                     </div>
                     <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link active">Contact</a>
                 </div>
-                <div class="nav-link dropdown">
-                    <a class="btn btn-primary py-2 px-4 d-none d-lg-block nav-link dropdown-toggle" data-toggle="dropdown">Join Us</a>
-                    <div class="nav-item dropdown">
-                        <div class="dropdown-menu text-center m-0">
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Students</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormStudents' %}" class="dropdown-menu-lg-left">New Student</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormAssignments' %}" class="dropdown-menu-lg-left">Assignment</a>
-                                </div>
-                            </div>
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Teachers</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormTeachers' %}" class="dropdown-item-lg-left">New Teachers</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormCourses' %}" class="dropdown-item-lg-left">New Courses</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
             </div>
         </nav>
     </div>
-    {% endblock %}
+{% endblock %}
     <!-- Navbar End -->
 
 

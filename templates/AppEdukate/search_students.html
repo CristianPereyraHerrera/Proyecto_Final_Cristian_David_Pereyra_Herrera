@@ -1,99 +1,99 @@
-{% extends "AppEdukate/detail.html" %}
+{% extends "index.html" %}
 {% load static %}
 
 
 
 {% block Navbar %}
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-            <a href="{% url 'AppEdukateIndex' %}" class="navbar-brand ml-lg-3">
-                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
-                <div class="navbar-nav mx-auto py-0">
-                    <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link">Home</a>
-                    <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link">About</a>
-                    <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link">Courses</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item">Course Detail</a>
-                            <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item">Our Features</a>
-                            <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
-                            <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
-                            <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item active">Students</a>
-                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
-                        </div>
-                    </div>
-                    <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class="nav-link dropdown">
-                    <a class="btn btn-primary py-2 px-4 d-none d-lg-block nav-link dropdown-toggle" data-toggle="dropdown">Join Us</a>
-                    <div class="nav-item dropdown">
-                        <div class="dropdown-menu text-center m-0">
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Students</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormStudents' %}" class="dropdown-menu-lg-left">New Student</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormAssignments' %}" class="dropdown-menu-lg-left">Assignment</a>
-                                </div>
-                            </div>
-                            <a class="nav-link dropdown-menu-left dropdown-toggle" style="color: black" data-toggle="dropdown">Teachers</a>
-                            <div class="nav-item m-0 dropdown">
-                                <div>
-                                    <a href="{% url 'AppEdukateFormTeachers' %}" class="dropdown-item-lg-left">New Teachers</a>
-                                </div>
-                                <div>
-                                    <a href="{% url 'AppEdukateFormCourses' %}" class="dropdown-item-lg-left">New Courses</a>
-                                </div>
-                            </div>
-                        </div>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="{% url 'AppEdukateIndex' %}" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mx-auto py-0">
+                <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link">Home</a>
+                <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link">About</a>
+                <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link">Courses</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item">Course Detail</a>
+                        <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item">Our Features</a>
+                        <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
+                        <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
                     </div>
                 </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
+                        <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item active">Students</a>
+                        <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
+                    </div>
+                </div>
+                <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
             </div>
-        </nav>
-    </div>
+            <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
+        </div>
+    </nav>
+</div>
 {% endblock %}
 
 
 {% block Header %}
-    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
-        <div class="container text-center py-5">
-            <h1 class="text-white display-1">Search Students</h1>
-            <div class="d-inline-flex text-white mb-5">
-                <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Search Students</p>
-            </div>
-            <form action="{% url 'AppEdukateStudents' %}" method="GET">
-                <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
-                    <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+<div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-1">Search Students</h1>
+        <div class="d-inline-flex text-white mb-5">
+            <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Search Students</p>
+        </div>
+        <form action="{% url 'AppEdukateStudents' %}" method="GET">
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+                <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Name" id="search-input-1" name="name">
                         <div class="input-group">
-                            <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Name" id="search-input-1" name="name">
+                            <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Last Name" id="search-input-2" name="last_name">
                             <div class="input-group">
-                                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Last Name" id="search-input-2" name="last_name">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Enter Email" id="search-input-3" name="email">
-                                </div>
+                                <input type="text" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Enter Email" id="search-input-3" name="email">
                             </div>
                         </div>
-                        <div class="input-group-append text-center">
-                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">Search</button>
-                        </div>
+                    </div>
+                    <div class="input-group-append text-center">
+                        <button type="submit" class="btn btn-secondary px-4 px-lg-5">Search</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
+{% endblock %}
+
+
+{% block About %}
+{% endblock %}
+
+
+{% block Feature %}
+{% endblock %}
+
+
+{% block Courses %}
+{% endblock %}
+
+
+{% block Team %}
+{% endblock %}
+
+
+{% block Testimonial %}
+{% endblock %}
+
+
+{% block Contact %}
 {% endblock %}

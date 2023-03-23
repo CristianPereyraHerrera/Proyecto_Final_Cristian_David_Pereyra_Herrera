@@ -1,7 +1,5 @@
-{% extends "AppEdukate/detail.html" %}
+{% extends "index.html" %}
 {% load static %}
-
-
 
 
 
@@ -27,9 +25,7 @@
                             <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
                             <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
                         </div>
-
                     </div>
-                    {% block Login %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
                         <div class="dropdown-menu m-0">
@@ -42,7 +38,6 @@
                 </div>
                 <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
             </div>
-                            {% endblock %}
         </nav>
     </div>
 {% endblock %}
@@ -51,32 +46,54 @@
 {% block Header %}
     <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
         <div class="container text-center py-5">
-            <h1 class="text-white display-1">Login</h1>
+            <h1 class="text-white display-1">Logout</h1>
             <div class="d-inline-flex text-white mb-5">
                 <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
                 <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Login</p>
+                <p class="m-0 text-uppercase">Logout</p>
                 </div>
-            {% block successful_uploaded %}
-                {% if my_form.errors %}
-                    <p style="color:#940f29;">Incorrect Data, Check Again</p>
-                {% endif %}
-                <form action="{% url "loginAccount" %}" method="POST">{% csrf_token %}
-                    <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
-                        <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+            {% block login_logout %}
+                <h6 class="text-white display-4 mb-sm-4">LOGOUT SUCCESSFUL!</h6>
+            {% endblock %}
+            <form action="{% url "logoutAccount" %}" method="POST">{% csrf_token %}
+                <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+                    <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Username" id="search-input-1" name="username">
                             <div class="input-group">
-                                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Username" id="search-input-1" name="username">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Password" id="search-input-2" name="password">
-                                </div>
-                            </div>
-                            <div class="input-group-append text-center">
-                                <button type="submit" class="btn btn-secondary px-4 px-lg-5">Login</button>
+                                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Password" id="search-input-2" name="password">
                             </div>
                         </div>
+                        <div class="input-group-append text-center">
+                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">Login</button>
+                        </div>
                     </div>
-                </form>
-            {% endblock %}
+                </div>
+            </form>
         </div>
     </div>
+{% endblock %}
+
+
+{% block About %}
+{% endblock %}
+
+
+{% block Feature %}
+{% endblock %}
+
+
+{% block Courses %}
+{% endblock %}
+
+
+{% block Team %}
+{% endblock %}
+
+
+{% block Testimonial %}
+{% endblock %}
+
+
+{% block Contact %}
 {% endblock %}
