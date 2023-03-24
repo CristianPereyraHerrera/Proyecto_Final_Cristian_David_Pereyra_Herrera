@@ -19,13 +19,13 @@ urlpatterns = [
     path('teachers/', teachers, name="AppEdukateTeachers"),
 
     path('search_courses/', login_required(search_courses), name="AppEdukateSearchCourses"),
-    path('search_students/', search_students, name="AppEdukateSearchStudents"),
+    path('search_students/', login_required(search_students), name="AppEdukateSearchStudents"),
     path('search_teachers/', login_required(search_teachers), name="AppEdukateSearchTeachers"),
 
-    path('form_courses/', form_courses, name="AppEdukateFormCourses"),
+    path('form_courses/', login_required(form_courses), name="AppEdukateFormCourses"),
     path('form_students/', form_students, name="AppEdukateFormStudents"),
     path('form_teachers/', form_teachers, name="AppEdukateFormTeachers"),
-    path('form_assignment/', form_assignment, name="AppEdukateFormAssignments"),
+    path('form_assignment/', login_required(form_assignment), name="AppEdukateFormAssignments"),
 
     path('courses_avaibles/', courses_avaibles, name="AppEdukateCoursesAvaibles"),
 ]
