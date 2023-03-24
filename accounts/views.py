@@ -12,7 +12,7 @@ def login_account(request):
             user = authenticate(username=information['username'], password=information['password'])
             if user:
                 login(request, user)
-                return redirect('AppEdukateDetail')
+                return redirect('AppEdukateIndex')
             else:
                 return redirect('AppEdukateContact')
     my_form = AuthenticationForm()
