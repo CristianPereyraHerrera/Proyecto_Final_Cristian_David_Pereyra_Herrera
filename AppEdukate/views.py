@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from collections import defaultdict
 from AppEdukate.models import Course, Student, Teacher, Assignment
 from AppEdukate.forms import Form_courses, Form_students, Form_teachers, Form_assignment
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -43,7 +43,7 @@ def contact(request):
 #                SEARCH                  #
 ##########################################
 
-
+@login_required
 def search_courses(request):
     return render(request, "AppEdukate/search_courses.html")
 
@@ -70,6 +70,7 @@ def courses(request):
         return HttpResponse(answer)
 
 
+@login_required
 def search_students(request):
     return render(request, "AppEdukate/search_students.html")
 
@@ -109,6 +110,7 @@ def students(request):
         return HttpResponse(answer)
 
 
+@login_required
 def search_teachers(request):
     return render(request, "AppEdukate/search_teachers.html")
 
@@ -160,6 +162,7 @@ def teachers(request):
 ##########################################
 
 
+@login_required
 def form_courses(request):
     if request.method == 'POST':
         min_length = 3
@@ -250,6 +253,7 @@ def form_teachers(request):
     return render(request, "AppEdukate/form_teachers.html", {"my_form": my_form})
 
 
+@login_required
 def form_assignment(request):
     if request.method == 'POST':
         min_length = 3

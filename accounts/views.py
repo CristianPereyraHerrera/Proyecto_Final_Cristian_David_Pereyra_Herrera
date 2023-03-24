@@ -3,7 +3,16 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
 
+def register_account(request):
+    if request.method == "POST":
+        my_form = UserCreationForm(request.POST)
+        if my_form.is_valid():
+            my_form.save()
+
+
+
 # Create your views here.
+
 def login_account(request):
     if request.method == "POST":
         my_form = AuthenticationForm(request, data=request.POST)

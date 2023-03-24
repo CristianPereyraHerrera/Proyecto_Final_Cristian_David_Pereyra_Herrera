@@ -75,29 +75,29 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link active">Home</a>
-                    <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link">About</a>
-                    <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link">Courses</a>
+                    <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link {% if request.path == '/Edukate/' %}active{% endif %}">Home</a>
+                    <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link {% if request.path == '/Edukate/about/' %}active{% endif %}">About</a>
+                    <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link {% if request.path == '/Edukate/courses_avaibles/' %}active{% endif %}">Courses</a>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
-                            <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item">Course Detail</a>
-                            <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item">Our Features</a>
-                            <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
-                            <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
+                            <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item {% if request.path == '/Edukate/detail/' %}active{% endif %}">Course Detail</a>
+                            <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item {% if request.path == '/Edukate/feature/' %}active{% endif %}">Our Features</a>
+                            <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item {% if request.path == '/Edukate/team/' %}active{% endif %}">Instructors</a>
+                            <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item {% if request.path == '/Edukate/testimonial/' %}active{% endif %}">Testimonial</a>
                         </div>
                     </div>
                     {% if user.is_authenticated %}
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
                         <div class="dropdown-menu text-center m-0">
-                            <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
-                            <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item">Students</a>
-                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
+                            <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item {% if request.path == '/Edukate/search_courses/' %}active{% endif %}">Courses</a>
+                            <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item {% if request.path == '/Edukate/search_students/' %}active{% endif %}">Students</a>
+                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item {% if request.path == '/Edukate/search_teachers/' %}active{% endif %}">Teachers</a>
                         </div>
                     </div>
                     {% endif %}
-                    <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
+                    <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link {% if request.path == '/Edukate/contact/' %}active{% endif %}">Contact</a>
                 </div>
                 <div class="nav-link dropdown">
                     {% if user.is_authenticated %}
