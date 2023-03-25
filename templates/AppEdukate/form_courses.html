@@ -63,26 +63,24 @@
             <i class="fa fa-angle-double-right pt-1 px-3"></i>
             <p class="m-0 text-uppercase">Create Course</p>
         </div>
-        {% block successful_creation %}
-            {% if my_form.errors %}
-                <p style="color:#940f29;">Incorrect Data, Check Again</p>
-            {% endif %}
-            <form action="{% url 'AppEdukateFormCourses' %}" method="POST">{% csrf_token %}
-                <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
-                    <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+        {% if my_form.errors %}
+            <p style="color:#940f29;">Incorrect Data, Check Again</p>
+        {% endif %}
+        <form action="{% url 'AppEdukateFormCourses' %}" method="POST">{% csrf_token %}
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+                <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Course" id="search-input-1" name="course">
                         <div class="input-group">
-                            <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Course" id="search-input-1" name="course">
-                            <div class="input-group">
-                                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Commission" id="search-input-2" name="commission">
-                            </div>
-                        </div>
-                        <div class="input-group-append text-center">
-                            <button type="submit" class="btn btn-secondary px-4 px-lg-5">Register</button>
+                            <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Commission" id="search-input-2" name="commission">
                         </div>
                     </div>
+                    <div class="input-group-append text-center">
+                        <button type="submit" class="btn btn-secondary px-4 px-lg-5">Register</button>
+                    </div>
                 </div>
-            </form>
-        {% endblock %}
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

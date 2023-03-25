@@ -8,6 +8,12 @@ def register_account(request):
         my_form = UserCreationForm(request.POST)
         if my_form.is_valid():
             my_form.save()
+            return redirect("loginAccount")
+    my_form = UserCreationForm()
+    context = {
+        "my_form": my_form
+    }
+    return render(request, "accounts/login.html", context=context)
 
 
 # Create your views here.

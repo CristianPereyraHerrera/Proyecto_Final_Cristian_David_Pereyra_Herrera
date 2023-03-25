@@ -6,11 +6,11 @@
 </head>
 <body>
     {% if courses %}
-        <p>Search Result: {{ courses.name }} {{ courses.commission }}</p>
+        <p>Search Result: {{ courses.name }} {{ courses.commision }}</p>
         <ul>
         {% for course in courses %}
-           <p><li> Course: {{ course.name }} </li>
-            <li> Commission: {{ course.commission }} </li></p>
+           <p><li> Name: {{ course.name }} </li>
+            <li> Last Name: {{ course.commission }} </li>
         {% endfor %}
         </ul>
     {% endif %}

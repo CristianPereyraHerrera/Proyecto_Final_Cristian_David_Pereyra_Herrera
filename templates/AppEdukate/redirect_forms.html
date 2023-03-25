@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block Header %}
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+    <div class="container text-center my-5 py-5">
+    <h3 style="color: white;">{{ success_message }} Successfully!</h3>
+    <p style="color: white;">Please wait!! Redirect in <span id="countdown"></span> seconds...</p>
+    <script>
+        var countdownEl = document.getElementById('countdown');
+        var countdown = 5;
+        countdownEl.textContent = countdown;
+        var countdownInterval = setInterval(function() {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown === 0) {
+                clearInterval(countdownInterval);
+                window.location.href = "{% url 'AppEdukateIndex' %}";
+            }
+        }, 1000); // tiempo en milisegundos (1000 = 1 segundo)
+    </script>
+    </div>
+    </div>
+{% endblock %}
+
+
+{% block About %}
+{% endblock %}
+
+
+{% block Feature %}
+{% endblock %}
+
+
+{% block Courses %}
+{% endblock %}
+
+
+{% block Team %}
+{% endblock %}
+
+
+{% block Testimonial %}
+{% endblock %}
+
+
+{% block Contact %}
+{% endblock %}
