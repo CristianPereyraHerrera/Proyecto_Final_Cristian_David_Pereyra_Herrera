@@ -13,7 +13,7 @@ def register_account(request):
     context = {
         "my_form": my_form
     }
-    return render(request, "accounts/login.html", context=context)
+    return render(request, "AppEdukate/form_students.html", context=context)
 
 
 # Create your views here.

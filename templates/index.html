@@ -102,12 +102,15 @@
                 <div class="nav-link dropdown">
                     {% if user.is_authenticated %}
                         <div class="nav-link dropdown">
-                            <a class="class=position-relative  btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: blueviolet;">{{ user.username }}</a>
+                            <a class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: blueviolet;">{{ user.username }}</a>
                         </div>
                         <a href="{% url 'logoutAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
                     {% else %}
-                        <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
+                        <div class="nav-link dropdown">
+                        <a href="{% url 'loginAccount' %}" class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block mb-1" style="background-color: blueviolet;">Login</a>
+                        <a href="{% url 'registerAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Register</a>
                     {% endif %}
+                    </div>
                 </div>
             </div>
         </nav>

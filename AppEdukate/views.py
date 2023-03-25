@@ -167,7 +167,7 @@ def form_courses(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_courses(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['course']) > min_length:
+        if my_form.is_valid() and len(my_form.cleaned_data['course']) >= min_length:
             information = my_form.cleaned_data
             course = Course(name=information['course'].lower(),
                             commission=int(information['commission']))
@@ -186,11 +186,11 @@ def form_students(request):
         min_length = 3
         my_form = Form_students(request.POST)
         if my_form.is_valid() \
-                and len(my_form.cleaned_data['name']) > min_length \
-                and len(my_form.cleaned_data['last_name']) > min_length \
-                and len(my_form.cleaned_data['email']) > min_length \
-                and len(my_form.cleaned_data['username']) > 8 \
-                and len(my_form.cleaned_data['password']) > 8:
+                and len(my_form.cleaned_data['name']) >= min_length \
+                and len(my_form.cleaned_data['last_name']) >= min_length \
+                and len(my_form.cleaned_data['email']) >= min_length \
+                and len(my_form.cleaned_data['username']) >= 8 \
+                and len(my_form.cleaned_data['password']) >= 8:
             information = my_form.cleaned_data
             student = Student(name=information['name'].lower(),
                               second_name=information['second_name'].lower(),
@@ -237,9 +237,12 @@ def form_teachers(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_teachers(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['name']) > min_length and len(my_form.cleaned_data['last_name']) > min_length and len(my_form.cleaned_data['profession']) > min_length:
+        if my_form.is_valid() and len(my_form.cleaned_data['name']) >= min_length \
+                and len(my_form.cleaned_data['last_name']) >= min_length \
+                and len(my_form.cleaned_data['profession']) >= min_length:
             information = my_form.cleaned_data
-            teacher = Teacher(name=information['name'].lower(), last_name=information['last_name'].lower(), email=information['email'].lower(),
+            teacher = Teacher(name=information['name'].lower(), last_name=information['last_name'].lower(),
+                              email=information['email'].lower(),
                               profession=information['profession'].lower())
             teacher.save()
             success_message = "Teacher Created"
@@ -261,11 +264,14 @@ def form_assignment(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_assignment(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['name']) > min_length and len(my_form.cleaned_data['last_name']) > min_length and len(my_form.cleaned_data['course']) > min_length:
+        if my_form.is_valid() and len(my_form.cleaned_data['name']) >= min_length \
+                and len(my_form.cleaned_data['last_name']) >= min_length \
+                and len(my_form.cleaned_data['course']) >= min_length:
             information = my_form.cleaned_data
             assignment = Assignment(name=information['name'].lower(), last_name=information['last_name'].lower(),
-                                     course=information['course'].lower(), commission=int(information['commission']),
-                                     assignment_date=information['assignment_date'], assignment=bool(information['assignment']))
+                                    course=information['course'].lower(), commission=int(information['commission']),
+                                    assignment_date=information['assignment_date'],
+                                    assignment=bool(information['assignment']))
             assignment.save()
             success_message = "Assignment Loaded"
             return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
