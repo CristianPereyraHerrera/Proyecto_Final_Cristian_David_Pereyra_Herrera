@@ -49,6 +49,7 @@ def search_courses(request):
     return render(request, "AppEdukate/search_courses.html")
 
 
+@login_required
 def courses(request):
     name = request.GET.get('name')
     commission = request.GET.get('commission')
@@ -76,6 +77,7 @@ def search_students(request):
     return render(request, "AppEdukate/search_students.html")
 
 
+@login_required
 def students(request):
     first_name = request.GET.get('first_name')
     last_name = request.GET.get('last_name')
@@ -116,6 +118,7 @@ def search_teachers(request):
     return render(request, "AppEdukate/search_teachers.html")
 
 
+@login_required
 def teachers(request):
     first_name = request.GET.get('first_name')
     last_name = request.GET.get('last_name')
@@ -168,15 +171,22 @@ def form_courses(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_courses(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['course']) >= min_length:
+        if my_form.is_valid() \
+                and len(my_form.cleaned_data['course']) >= min_length:
             information = my_form.cleaned_data
             course = Course(name=information['course'].lower(),
                             commission=int(information['commission']))
             course.save()
-            success_message = "Course Created"
+            success_message = "Course Created Successful!"
             return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
         else:
-            my_form.add_error('course', f'The course name must have more than {min_length} characters')
+            if not my_form.cleaned_data.get('course'):
+                my_form.add_error('course', 'This field is required.')
+            elif len(my_form.cleaned_data['course']) < min_length:
+                my_form.add_error('course', f'The course name must have more than {min_length} characters')
+
+            if not my_form.cleaned_data.get('commission'):
+                my_form.add_error('commission', 'This field is required.')
     else:
         my_form = Form_courses()
     return render(request, "AppEdukate/form_courses.html", {"my_form": my_form})
@@ -206,9 +216,8 @@ def form_students(request):
                               email=information['email'].lower(),
                               username=information['username'].lower(),
                               password=information['password'])
-
             student.save()
-            success_message = "Student Created"
+            success_message = "Student Created Successful!"
             return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
         else:
             if not my_form.cleaned_data.get('first_name'):
@@ -252,7 +261,7 @@ def form_teachers(request):
                               email=information['email'].lower(),
                               profession=information['profession'].lower())
             teacher.save()
-            success_message = "Teacher Created"
+            success_message = "Teacher Created Successful!"
             return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
         else:
             if len(my_form.cleaned_data['name']) < min_length:
@@ -271,23 +280,34 @@ def form_assignment(request):
     if request.method == 'POST':
         min_length = 3
         my_form = Form_assignment(request.POST)
-        if my_form.is_valid() and len(my_form.cleaned_data['first_name']) >= min_length \
+        if my_form.is_valid() \
+                and len(my_form.cleaned_data['first_name']) >= min_length \
                 and len(my_form.cleaned_data['last_name']) >= min_length \
                 and len(my_form.cleaned_data['course']) >= min_length:
             information = my_form.cleaned_data
-            assignment = Assignment(first_name=information['first_name'].lower(), last_name=information['last_name'].lower(),
-                                    course=information['course'].lower(), commission=int(information['commission']),
+            assignment = Assignment(first_name=information['first_name'].lower(),
+                                    last_name=information['last_name'].lower(),
+                                    course=information['course'].lower(),
+                                    commission=int(information['commission']),
                                     assignment_date=information['assignment_date'],
                                     assignment=bool(information['assignment']))
             assignment.save()
-            success_message = "Assignment Loaded"
+            success_message = "Assignment Loaded Successful!"
             return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
         else:
-            if len(my_form.cleaned_data['first_name']) < min_length:
+            if not my_form.cleaned_data.get('first_name'):
+                my_form.add_error('first_name', 'This field is required.')
+            elif len(my_form.cleaned_data['first_name']) < min_length:
                 my_form.add_error('first_name', f'The name must have more than {min_length} characters')
-            if len(my_form.cleaned_data['last_name']) < min_length:
+
+            if not my_form.cleaned_data.get('last_name'):
+                my_form.add_error('last_name', 'This field is required.')
+            elif len(my_form.cleaned_data['last_name']) < min_length:
                 my_form.add_error('last_name', f'The last name must have more than {min_length} characters')
-            if len(my_form.cleaned_data['course']) < min_length:
+
+            if not my_form.cleaned_data.get('course'):
+                my_form.add_error('course', 'This field is required.')
+            elif len(my_form.cleaned_data['course']) < min_length:
                 my_form.add_error('course', f'The course must have more than {min_length} characters')
     else:
         my_form = Form_assignment()

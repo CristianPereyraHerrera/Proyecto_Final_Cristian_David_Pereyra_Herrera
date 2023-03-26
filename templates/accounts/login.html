@@ -15,9 +15,6 @@
             <p style="color:#940f29;">Incorrect Data, Check Again</p>
         {% endif %}
         <form action="{% url 'loginAccount' %}" method="POST">{% csrf_token %}
-            {% block login_logout %}
-                <h6 class="text-white display-4 mb-sm-4">LOGIN SUCCESSFUL!</h6>
-            {% endblock %}
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group">
@@ -34,7 +31,7 @@
                     </div>
                     <div class="d-inline-flex text-white mb-5">
                         <p class="m-0 text-uppercase mb-3"></p>
-                        <p class="m-0">Not yet Registered?</p>
+                        <p class="m-0">Not Yet Registered?</p>
                         <i class="fa fa-angle-double-right pt-1 px-3"></i>
                         <a class="text-white" href="{% url 'AppEdukateFormStudents' %}">Register here!</a>
                     </div>

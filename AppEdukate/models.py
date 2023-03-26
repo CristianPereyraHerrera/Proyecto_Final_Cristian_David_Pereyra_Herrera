@@ -12,9 +12,9 @@ class Course(models.Model):
 
 class Assignment(models.Model):
     first_name = models.CharField(max_length=30)
-    second_name = models.CharField(max_length=30)
+    second_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
-    second_last_name = models.CharField(max_length=30)
+    second_last_name = models.CharField(max_length=30, blank=True, null=True)
     course = models.CharField(max_length=30)
     commission = models.IntegerField()
     assignment_date = models.DateField()

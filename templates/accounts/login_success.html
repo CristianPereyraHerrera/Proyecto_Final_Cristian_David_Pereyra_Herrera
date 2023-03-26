@@ -5,13 +5,13 @@
 {% block Header %}
     <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
         <div class="container text-center py-5">
-            <h1 class="text-white display-1">Logout</h1>
+            <h1 class="text-white display-1">Login</h1>
             <div class="d-inline-flex text-white mb-5">
                 <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
                 <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Logout</p>
+                <p class="m-0 text-uppercase">Login</p>
             </div>
-            <h6 class="text-white display-4 mb-sm-4">Logout Successful!</h6>
+            <h6 class="text-white display-4 mb-sm-4">Login Successful!</h6>
             <p style="color: white;">Please wait!! Redirect in <span id="countdown"></span> seconds...</p>
         </div>
     </div>
@@ -22,7 +22,7 @@
             document.getElementById("countdown").innerHTML = "" + count + "";
             if (count === 0) {
                 clearInterval(countdown);
-                window.location.href = "{% url 'loginAccount' %}";
+                window.location.href = "{% url 'AppEdukateIndex' %}";
             }
             }, 1000); // 1000 = 1 second
     </script>

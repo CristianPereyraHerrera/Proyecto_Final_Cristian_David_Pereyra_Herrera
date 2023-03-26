@@ -2,58 +2,6 @@
 {% load static %}
 
 
-
-{% block Navbar %}
-<div class="container-fluid p-0">
-    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-        <a href="{% url 'AppEdukateIndex' %}" class="navbar-brand ml-lg-3">
-            <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
-            <div class="navbar-nav mx-auto py-0">
-                <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link">Home</a>
-                <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link">Courses</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="{% url 'AppEdukateDetail' %}" class="dropdown-item">Course Detail</a>
-                        <a href="{% url 'AppEdukateFeature' %}" class="dropdown-item">Our Features</a>
-                        <a href="{% url 'AppEdukateTeam' %}" class="dropdown-item">Instructors</a>
-                        <a href="{% url 'AppEdukateTestimonial' %}" class="dropdown-item">Testimonial</a>
-                    </div>
-                </div>
-                {% if user.is_authenticated %}
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Search</a>
-                    <div class="dropdown-menu text-center m-0">
-                        <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item">Courses</a>
-                        <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item">Students</a>
-                        <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item">Teachers</a>
-                    </div>
-                </div>
-                {% endif %}
-                <a href="{% url 'AppEdukateContact' %}" class="nav-item nav-link">Contact</a>
-            </div>
-            <div class="nav-link dropdown">
-                {% if user.is_authenticated %}
-                    <div class="nav-link dropdown">
-                        <a class="class=position-relative  btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: blueviolet;">{{ user.username }}</a>
-                    </div>
-                    <a href="{% url 'logoutAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
-                {% else %}
-                    <a href="{% url 'loginAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-</div>
-{% endblock %}
-
-
 {% block Header %}
 <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px; height: 900px;">
 <div class="container text-center py-5">
@@ -61,7 +9,7 @@
     <div class="d-inline-flex text-white mb-5">
         <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
         <i class="fa fa-angle-double-right pt-1 px-3"></i>
-         <p class="m-0 text-uppercase">Student Registration</p>
+        <p class="m-0 text-uppercase">Student Registration</p>
     </div>
     <style>
         .error-message {
@@ -78,85 +26,95 @@
             left: 110%;
         }
     </style>
+    {% if my_form.errors %}
+        <p style="color:#940f29;">Incorrect Data, Check Again</p>
+    {% endif %}
     <form action="{% url 'AppEdukateFormStudents' %}" method="POST">{% csrf_token %}
-    <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
-        <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="First Name" id="search-input-1" name="first_name">
-                {% if my_form.errors.first_name %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.first_name %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Second Name                                             (optional)" id="search-input-2" name="second_name">
-                {% if my_form.errors.second_name %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.second_name %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Last Name" id="search-input-3" name="last_name">
-                {% if my_form.errors.last_name %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.last_name %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Second Last Name                                     (optional)" id="search-input-4" name="second_last_name">
-                {% if my_form.errors.second_last_name %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.second_last_name %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Email" id="search-input-5" name="email">
-                {% if my_form.errors.email %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.email %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Username" id="search-input-6" name="username">
-                {% if my_form.errors.username %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.username %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password">
-                {% if my_form.errors.password %}
-                    <div class="error-container">
-                        {% for error in my_form.errors.password %}
-                            <p class="error-message text-left">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="input-group-append text-center">
-                <button type="submit" class="btn btn-secondary px-4 px-lg-5">Register</button>
+        <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+            <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="First Name" id="search-input-1" name="first_name">
+                    {% if my_form.errors.first_name %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.first_name %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Second Name                                             (optional)" id="search-input-2" name="second_name">
+                    {% if my_form.errors.second_name %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.second_name %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Last Name" id="search-input-3" name="last_name">
+                    {% if my_form.errors.last_name %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.last_name %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Second Last Name                                     (optional)" id="search-input-4" name="second_last_name">
+                    {% if my_form.errors.second_last_name %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.second_last_name %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Email" id="search-input-5" name="email">
+                    {% if my_form.errors.email %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.email %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Username" id="search-input-6" name="username">
+                    {% if my_form.errors.username %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.username %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group position-relative">
+                    <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password">
+                    {% if my_form.errors.password %}
+                        <div class="error-container">
+                            {% for error in my_form.errors.password %}
+                                <p class="error-message text-left">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group-append text-center">
+                    <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Register</button>
+                </div>
+                <div class="d-inline-flex text-white mb-5">
+                    <p class="m-0 text-uppercase mb-3"></p>
+                    <p class="m-0">Are You Registered?</p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <a class="text-white" href="{% url 'loginAccount' %}">Login here!</a>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 </div>
 {% endblock %}
 

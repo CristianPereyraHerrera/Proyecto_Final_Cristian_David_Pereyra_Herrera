@@ -19,7 +19,6 @@
                     <h2 class="mb-4 text-white" style="text-decoration: underline; text-decoration-color: white;">Courses Available:</h2>
                     {% if courses %}
                         {% for course in courses %}
-{#                              <h2><pre class="mb-1 text-white">Course: {{ course.name }}    Commission: {{ course.commission }}</pre></h2>#}
                             <h2><pre class="mb-1 text-black-50"> ·{{ course.name }}</pre></h2>
                         {% endfor %}
                     {% else %}
