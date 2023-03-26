@@ -74,7 +74,7 @@
             top: -20%;
             right: -57%;
             transform: translateY(80%);
-            width: 90%;
+            width: 100%;
             left: 110%;
         }
     </style>
@@ -82,10 +82,10 @@
     <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
         <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
             <div class="input-group position-relative">
-                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Name" id="search-input-1" name="name">
-                {% if my_form.errors.name %}
+                <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="First Name" id="search-input-1" name="first_name">
+                {% if my_form.errors.first_name %}
                     <div class="error-container">
-                        {% for error in my_form.errors.name %}
+                        {% for error in my_form.errors.first_name %}
                             <p class="error-message text-left">{{ error }}</p>
                         {% endfor %}
                     </div>

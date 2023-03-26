@@ -6,10 +6,10 @@
 </head>
 <body>
     {% if teachers %}
-        <p>Search Result: {{ teachers.name }} {{ teachers.last_name }} {{ teachers.email }} {{ teachers.profession }}</p>
+        <p>Search Result: {{ teachers.first_name }} {{ teachers.last_name }} {{ teachers.email }} {{ teachers.profession }}</p>
         <ul>
         {% for teacher in teachers %}
-           <p><li> Name: {{ teacher.name }} </li>
+           <p><li> Name: {{ teacher.first_name }} </li>
             <li> Last Name: {{ teacher.last_name }} </li>
             <li> Email: {{ teacher.email }} </li>
             <li> Profession: {{ teacher.profession }} </li></p>

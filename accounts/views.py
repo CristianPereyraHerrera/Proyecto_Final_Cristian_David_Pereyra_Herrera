@@ -30,9 +30,9 @@ def login_account(request):
                 if next_url:
                     return redirect(next_url)
                 else:
-                    return redirect('AppEdukateIndex')
+                    return redirect('loginAccount')
             else:
-                return redirect('AppEdukateContact')
+                return redirect('AppEdukateIndex')
     my_form = AuthenticationForm()
     next_url = request.GET.get('next', '/')
     context = {

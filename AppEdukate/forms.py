@@ -7,7 +7,7 @@ class Form_courses(forms.Form):
 
 
 class Form_students(forms.Form):
-    name = forms.CharField(max_length=30, required=True, error_messages={'required': 'Please enter your name.'})
+    first_name = forms.CharField(max_length=30, required=True, error_messages={'required': 'Please enter your first name.'})
     second_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=True, error_messages={'required': 'Please enter your last name.'})
     second_last_name = forms.CharField(max_length=30, required=False)
@@ -17,7 +17,7 @@ class Form_students(forms.Form):
 
 
 class Form_teachers(forms.Form):
-    name = forms.CharField(max_length=30, required=True)
+    first_name = forms.CharField(max_length=30, required=True)
     second_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=True)
     second_last_name = forms.CharField(max_length=30, required=False)
@@ -28,7 +28,7 @@ class Form_teachers(forms.Form):
 
 
 class Form_assignment(forms.Form):
-    name = forms.CharField(max_length=30, required=True)
+    first_name = forms.CharField(max_length=30, required=True)
     second_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=True)
     second_last_name = forms.CharField(max_length=30, required=False)
