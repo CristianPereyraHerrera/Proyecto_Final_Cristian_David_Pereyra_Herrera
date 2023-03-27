@@ -11,7 +11,10 @@
             <i class="fa fa-angle-double-right pt-1 px-3"></i>
             <p class="m-0 text-uppercase">Search Teachers</p>
         </div>
-        <form action="{% url 'AppEdukateTeachers' %}" method="GET">
+        {% if message_error %}
+            <p style="color:#940f29;">{{ message_error }}</p>
+        {% endif %}
+        <form action="" method="GET">
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group">
@@ -32,6 +35,53 @@
                 </div>
             </div>
         </form>
+        <div class="input-group-append text-center mx-auto mb-5 d-flex flex-column align-items-center">
+            <div class="input-group-append text-white">
+                {% if teachers %}
+                    <div class="row custom-row">
+                        {% if teachers|length <= 5 %}
+                            <div class="col-md-12 text-center">
+                                {% for teacher in teachers %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% elif teachers|length <= 10 %}
+                            <div class="col-md-4" style="transform: translateX(-33.33%)">
+                                {% for teacher in teachers|slice:"0:3" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for teacher in teachers|slice:"3:6" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(33.33%)">
+                                {% for teacher in teachers|slice:"6:9" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="col-md-4" style="transform: translateX(-30%)">
+                                {% for teacher in teachers|slice:"0:5" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for teacher in teachers|slice:"5:10" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(30%)">
+                                {% for teacher in teachers|slice:"10:15" %}
+                                    <p>Teacher: {{ teacher.first_name }}<br>Last Name: {{ teacher.last_name }}<br>Email: {{ teacher.email }}<br>Profession: {{ teacher.profession }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

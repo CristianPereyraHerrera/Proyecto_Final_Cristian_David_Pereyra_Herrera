@@ -11,7 +11,10 @@
             <i class="fa fa-angle-double-right pt-1 px-3"></i>
             <p class="m-0 text-uppercase">Search Students</p>
         </div>
-        <form action="{% url 'AppEdukateStudents' %}" method="GET">
+        {% if message_error %}
+            <p style="color:#940f29;">{{ message_error }}</p>
+        {% endif %}
+        <form action="" method="GET">
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group">
@@ -29,6 +32,53 @@
                 </div>
             </div>
         </form>
+        <div class="input-group-append text-center mx-auto mb-5 d-flex flex-column align-items-center">
+            <div class="input-group-append text-white">
+                {% if students %}
+                    <div class="row custom-row">
+                        {% if students|length <= 5 %}
+                            <div class="col-md-12 text-center">
+                                {% for student in students %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% elif students|length <= 10 %}
+                            <div class="col-md-4" style="transform: translateX(-33.33%)">
+                                {% for student in students|slice:"0:3" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for student in students|slice:"3:6" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(33.33%)">
+                                {% for student in students|slice:"6:9" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="col-md-4" style="transform: translateX(-30%)">
+                                {% for student in students|slice:"0:5" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for student in students|slice:"5:10" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(30%)">
+                                {% for student in students|slice:"10:15" %}
+                                    <p>Student: {{ student.first_name }}<br>Last Name: {{ student.last_name }}<br>Email: {{ student.email }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
