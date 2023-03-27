@@ -1,5 +1,5 @@
 from django.urls import path
-from AppEdukate.views import index, about, detail, feature, team, testimonial, contact, courses, students, teachers, \
+from AppEdukate.views import index, about, detail, feature, team, testimonial, contact, students, teachers, \
     search_courses, search_students, search_teachers, form_courses, form_students, form_teachers, form_assignment,\
     courses_avaibles
 
@@ -13,7 +13,6 @@ urlpatterns = [
     path('testimonial/', testimonial, name="AppEdukateTestimonial"),
     path('contact/', contact, name="AppEdukateContact"),
 
-    path('courses/', courses, name="AppEdukateCourses"),
     path('students/', students, name="AppEdukateStudents"),
     path('teachers/', teachers, name="AppEdukateTeachers"),
 

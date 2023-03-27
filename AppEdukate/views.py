@@ -44,32 +44,35 @@ def contact(request):
 #                SEARCH                  #
 ##########################################
 
+
 @login_required
 def search_courses(request):
-    return render(request, "AppEdukate/search_courses.html")
-
-
-@login_required
-def courses(request):
     name = request.GET.get('name')
     commission = request.GET.get('commission')
     min_length = 3
-    if not name and not commission:
-        answer = "You did not enter data"
-        return HttpResponse(answer)
-    if name and len(name) < min_length:
-        answer = f"Enter at least {min_length} characters"
-        return HttpResponse(answer)
     courses = Course.objects.all()
-    if name:
-        courses = courses.filter(name__icontains=name)
-    if commission:
-        courses = courses.filter(commission=commission)
-    if courses.exists():
-        return render(request, "AppEdukate/results_search_courses.html", {'courses': courses, 'commission': commission})
+    message_error = ""
+    if not name and not commission and not request.GET:
+        return render(request, "AppEdukate/search_courses.html")
+    if not name and not commission:
+        message_error = "Enter some data. Try Again"
+        return render(request, "AppEdukate/search_courses.html", {'message_error': message_error})
+    if name and len(name) < min_length or commission and len(commission) < min_length:
+        message_error = f'You must enter at least {min_length} characters'
     else:
-        answer = "No results found"
-        return HttpResponse(answer)
+        if name:
+            courses = courses.filter(name__icontains=name)
+        elif commission:
+            courses = courses.filter(commission=commission)
+    if message_error:
+        return render(request, "AppEdukate/search_courses.html", {'message_error': message_error})
+    elif courses.exists():
+        return render(request, "AppEdukate/search_courses.html", {'courses': courses, 'commission': commission})
+    else:
+        message_error = "No results found"
+        return render(request, "AppEdukate/search_courses.html", {'message_error': message_error})
+
+
 
 
 @login_required

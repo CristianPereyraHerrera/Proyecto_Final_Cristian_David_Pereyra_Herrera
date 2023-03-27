@@ -5,6 +5,6 @@ from django.contrib.auth.models import User
 
 # class UserRegisterForm(UserCreationForm):
 #     is_staff = forms.BooleanField()
-#
-#     class Meta:
-#         fields = ("is_staff")
+
+    # class Meta:
+    #     fields = ("is_staff")

@@ -11,7 +11,10 @@
             <i class="fa fa-angle-double-right pt-1 px-3"></i>
             <p class="m-0 text-uppercase">Search Courses</p>
         </div>
-        <form action="{% url 'AppEdukateCourses' %}" method="GET">
+        {% if message_error %}
+            <p style="color:#940f29;">{{ message_error }}</p>
+        {% endif %}
+        <form action="" method="GET">
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group">
@@ -21,11 +24,58 @@
                         </div>
                     </div>
                     <div class="input-group-append text-center">
-                        <button type="submit" class="btn btn-secondary px-4 px-lg-5">Search</button>
+                        <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Search</button>
                     </div>
                 </div>
             </div>
         </form>
+        <div class="input-group-append text-center mx-auto mb-5 d-flex flex-column align-items-center">
+            <div class="input-group-append text-white">
+                {% if courses %}
+                    <div class="row custom-row">
+                        {% if courses|length <= 5 %}
+                            <div class="col-md-12 text-center">
+                                {% for course in courses %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% elif courses|length <= 10 %}
+                            <div class="col-md-4" style="transform: translateX(-33.33%)">
+                                {% for course in courses|slice:"0:3" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for course in courses|slice:"3:6" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(33.33%)">
+                                {% for course in courses|slice:"6:9" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="col-md-4" style="transform: translateX(-30%)">
+                                {% for course in courses|slice:"0:5" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(0%)">
+                                {% for course in courses|slice:"5:10" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4" style="transform: translateX(30%)">
+                                {% for course in courses|slice:"10:15" %}
+                                    <p>Course: {{ course.name }}<br>Commission: {{ course.commission }}</p><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
