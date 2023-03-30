@@ -14,14 +14,28 @@
         {% if my_form.errors %}
             <p style="color:#940f29;">Incorrect Data, Check Again</p>
         {% endif %}
-        <form action="{% url 'loginAccount' %}" method="POST">{% csrf_token %}
+        <form method="POST">{% csrf_token %}
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group">
                         <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Username" id="search-input-1" name="username">
+                        {% if my_form.errors.username %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.username %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="input-group">
                         <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-2" name="password">
+                        {% if my_form.errors.password %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.password %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="input-group-append text-center">
                         {% if request.GET.next %}

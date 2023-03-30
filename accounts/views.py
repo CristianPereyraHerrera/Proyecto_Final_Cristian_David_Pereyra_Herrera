@@ -1,28 +1,46 @@
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
+from accounts.forms import UserRegisterForm
 
-# from accounts.forms import UserRegisterForm
 
 
-# def edit_user(request):
-#     user = request.user
-#     my_form = UserRegisterForm(initial={
-#         "username": user.username,
-#         "password": user.password,
-#         "email": user.email,
-#         "first_name": user.first_name,
-#         "last_name": user.last_name,
-#         "is_staff": user.is_staff,
-#         "is_active": user.is_active,
-#     })
-#     context = {
-#         "my_form": my_form
-#     }
-#     return render(request, "accounts/edit_user.html", context=context)
+@login_required()
+def edit_user(request):
+    user = request.user
+    if request.method == "POST":
+        my_form = UserRegisterForm(request.POST)
+        if my_form.is_valid():
+            information = my_form.cleaned_data
+            if check_password(information["password"], user.password):
+                user.username = information["username"]
+                user.email = information["email"]
+                success_message = "Account Edited Successful!"
+                messages.success(request, success_message)
+                user.save()
+                logout(request)
+                if messages.success:
+                    context = {
+                        "title": "Edit Account",
+                        "redirect": ('loginAccount')
+                    }
+                    return render(request, "accounts/logout.html", context=context)
+            else:
+                messages.error(request, 'password invalid')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    my_form = UserRegisterForm(initial={
+        "username": user.username,
+        "email": user.email
+    })
+    context = {
+        "my_form": my_form
+    }
+    return render(request, "accounts/edit_user.html", context=context)
 
 
 def register_account(request):

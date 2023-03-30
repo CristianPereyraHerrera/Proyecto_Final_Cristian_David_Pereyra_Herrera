@@ -78,6 +78,7 @@
                     <a href="{% url 'AppEdukateIndex' %}" class="nav-item nav-link {% if request.path == '/Edukate/' %}active{% endif %}">Home</a>
                     <a href="{% url 'AppEdukateAbout' %}" class="nav-item nav-link {% if request.path == '/Edukate/about/' %}active{% endif %}">About</a>
                     <a href="{% url 'AppEdukateCoursesAvaibles' %}" class="nav-item nav-link {% if request.path == '/Edukate/courses_avaibles/' %}active{% endif %}">Courses</a>
+                    <a href="" class="nav-item nav-link {% if request.path == '' %}active{% endif %}">Blog</a>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
@@ -93,7 +94,6 @@
                         <div class="dropdown-menu text-center m-0">
                             <a href="{% url 'AppEdukateSearchCourses' %}" class="dropdown-item {% if request.path == '/Edukate/search_courses/' %}active{% endif %}">Courses</a>
                             <a href="{% url 'AppEdukateSearchStudents' %}" class="dropdown-item {% if request.path == '/Edukate/search_students/' %}active{% endif %}">Students</a>
-                            <a href="{% url 'AppEdukateSearchTeachers' %}" class="dropdown-item {% if request.path == '/Edukate/search_teachers/' %}active{% endif %}">Teachers</a>
                         </div>
                     </div>
                     {% endif %}
