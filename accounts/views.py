@@ -6,19 +6,26 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
 from accounts.forms import UserRegisterForm
-
+from accounts.models import Avatar
 
 
 @login_required()
 def edit_user(request):
     user = request.user
     if request.method == "POST":
-        my_form = UserRegisterForm(request.POST)
+        my_form = UserRegisterForm(request.POST, request.FILES)
         if my_form.is_valid():
             information = my_form.cleaned_data
             if check_password(information["password"], user.password):
                 user.username = information["username"]
                 user.email = information["email"]
+
+                try:
+                    user.avatar.image = information["image"]
+                except:
+                    avatar = Avatar(user=user, image=information["image"])
+                    avatar.save()
+
                 success_message = "Account Edited Successful!"
                 messages.success(request, success_message)
                 user.save()

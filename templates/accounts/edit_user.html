@@ -43,7 +43,7 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
-                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Edit Email" id="search-input-6" name="email" value="{{ my_form.email.value }}">
+                        <input type="text" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Edit Email" id="search-input-6" name="email" value="{{ my_form.email.value }}">
                         {% if user_form.errors.email %}
                             <div class="error-container">
                                 {% for error in user_form.errors.email %}
@@ -53,7 +53,17 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
-                        <input type="password" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password">
+                        <input type="file" class="mb-2" style="color: white"  id="search-input-8" name="image">
+                        {% if form.errors.image %}
+                            <div class="error-container">
+                                {% for error in form.errors.image %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password">
                         {% if password_form.errors.new_password %}
                             <div class="error-container">
                                 {% for error in password_form.errors.new_password %}
@@ -62,16 +72,6 @@
                             </div>
                         {% endif %}
                     </div>
-{#                    <div class="input-group position-relative">#}
-{#                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Confirm new password" id="search-input-8" name="password">#}
-{#                        {% if password_form.errors.new_password_confirm %}#}
-{#                            <div class="error-container">#}
-{#                                {% for error in password_form.errors.new_password_confirm %}#}
-{#                                    <p class="error-message text-left">{{ error }}</p>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                    </div>#}
 {#                    <div class="input-group position-relative">#}
 {#                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password1">#}
 {#                        {% if my_form.errors.password %}#}
