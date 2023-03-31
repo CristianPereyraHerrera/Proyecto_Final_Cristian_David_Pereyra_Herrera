@@ -39,6 +39,10 @@ def contact(request):
     return render(request, "AppEdukate/contact.html")
 
 
+def page_not_avaible(request):
+    return render(request, "AppEdukate/page_not_avaible.html")
+
+
 ##########################################
 #                SEARCH                  #
 ##########################################
