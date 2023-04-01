@@ -1,0 +1,20 @@
+{% extends 'Posts/posts_page.html' %}
+
+<h1>Post page</h1>
+
+{% block content %}
+<div class="container">
+    <div class="row py-2 px-lg-6 text-center">
+        <img class="img-thumbnail mx-auto mb-2" src="{{ post.image_post.url }}" style="height: 500px; width: auto;">
+        <div class="mx-auto">
+            <h1 class="text-center" style="overflow: hidden; max-width: 80%; margin: 0 auto; word-wrap: break-word;">{{ post.title }}</h1><br>
+            <h5 class="text-center" style="overflow: hidden; max-width: 80%; margin: 0 auto; word-wrap: break-word;"><p>{{ post.subtitle }}</p></h5><br>
+            <div style="max-width: 80%; text-align: center; margin: 0 auto; overflow: hidden;">
+                <p style="color: #111111; word-wrap: break-word;">{{ post.description }}</p>
+            </div>
+            <br>
+            <p><small class="text-muted" style="font-weight: bold; font-size: 16px;">Posted by: <span style="font-size: 18px; color: #111111;">{{ post.user.username }}</span></small></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

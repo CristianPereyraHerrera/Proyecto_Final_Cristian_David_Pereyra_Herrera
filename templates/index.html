@@ -25,23 +25,23 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'AppEdukate/css/style.css' %}" rel="stylesheet">
     <style>
-      div.circular-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
+        div.circular-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
 
-.circular-avatar img {
-  width: 120%;
-  height: 120%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-}
+        .circular-avatar img {
+            width: 120%;
+            height: 120%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +99,7 @@
 
                     {% if user.is_authenticated %}
                     <div class="nav-item dropdown">
-                        <a href="" class="nav-item nav-link {% if request.path == '' %}active{% endif %}">Blog</a>
+                        <a href="{% url 'home' %}" class="nav-item nav-link {% if request.path == '/pages/' %}active{% endif %}">Blog</a>
                     </div>
                     {% endif %}
                     <div class="nav-item dropdown">
@@ -129,7 +129,7 @@
                                 <img src="{{ user.avatar.image.url }}" alt="Usuario" height="50 px">
                             </div>
                             <div class="ml-3">
-                                <a href="{% url 'accountEditUser' %}" class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: blueviolet;">{{ user.username }}</a>
+                                <a href="{% url 'accountEditUser' %}" class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: #0d0e49;">{{ user.username }}</a>
                             </div>
                             <div class="ml-3">
                                 <a href="{% url 'logoutAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
@@ -137,7 +137,7 @@
                         </div>
                     {% else %}
                         <div class="d-flex align-items-center">
-                            <a href="{% url 'loginAccount' %}" class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: blueviolet;">Login</a>
+                            <a href="{% url 'loginAccount' %}" class="class=position-relative btn btn-secondary py-2 px-4 d-none d-lg-block" style="background-color: #0d0e49;">Login</a>
                             <div class="ml-3">
                                 <a href="{% url 'registerAccount' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Register</a>
                             </div>
@@ -161,6 +161,12 @@
     </div>
     {% endblock %}
     <!-- Header End -->
+
+
+    <!-- Blog Start -->
+    {% block Blog %}
+    {% endblock %}
+    <!-- Blog End -->
 
 
     <!-- About Start -->
@@ -687,5 +693,4 @@
     <!-- Template Javascript -->
     <script src="{% static 'AppEdukate/js/main.js' %}"></script>
 </body>
-
 </html>

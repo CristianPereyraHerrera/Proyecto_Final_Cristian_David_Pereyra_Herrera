@@ -1,0 +1,107 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block Header %}
+<div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px; height: 900px;">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-1">Create Post</h1>
+        <div class="d-inline-flex text-white mb-5">
+            <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Create Post</p>
+        </div>
+        <style>
+            .error-message {
+                color:#940f29;
+                position: relative;
+                line-height: 0.1;
+            }
+            .error-container {
+                position: absolute;
+                top: -20%;
+                right: -57%;
+                transform: translateY(80%);
+                width: 100%;
+                left: 110%;
+            }
+        </style>
+        {% if my_form.errors %}
+            <p style="color:#940f29;">Incorrect Data, Check Again</p>
+        {% endif %}
+        <form action="{% url 'CreatePost' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
+                <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
+                    <div class="input-group position-relative">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Title" id="search-input-5" name="title" value="{{ form.title.value }}">
+                        {% if form.errors.title %}
+                            <div class="error-container">
+                                {% for error in form.errors.title %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Subtitle" id="search-input-6" name="subtitle" value="{{ form.subtitle.value }}">
+                        {% if form.errors.subtitle %}
+                            <div class="error-container">
+                                {% for error in form.errors.subtitle %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="text" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Description" id="search-input-6" name="description" value="{{ form.description.value }}">
+                        {% if form.errors.description %}
+                            <div class="error-container">
+                                {% for error in form.errors.description %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="file" class="mb-2" style="color: white"  id="search-input-8" name="image_post">
+                        {% if form.errors.image %}
+                            <div class="error-container">
+                                {% for error in form.errors.image %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group-append text-center">
+                        <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Create Post</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block About %}
+{% endblock %}
+
+
+{% block Feature %}
+{% endblock %}
+
+
+{% block Courses %}
+{% endblock %}
+
+
+{% block Team %}
+{% endblock %}
+
+
+{% block Testimonial %}
+{% endblock %}
+
+
+{% block Contact %}
+{% endblock %}
