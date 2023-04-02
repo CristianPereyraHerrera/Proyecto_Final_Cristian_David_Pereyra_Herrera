@@ -5,11 +5,11 @@
 {% block Header %}
 <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px; height: 900px;">
     <div class="container text-center py-5">
-        <h1 class="text-white display-1">Create Post</h1>
+        <h1 class="text-white display-1">{{ title }}</h1>
         <div class="d-inline-flex text-white mb-5">
             <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
             <i class="fa fa-angle-double-right pt-1 px-3"></i>
-            <p class="m-0 text-uppercase">Create Post</p>
+            <p class="m-0 text-uppercase">{{ title }}</p>
         </div>
         <style>
             .error-message {
@@ -29,7 +29,12 @@
         {% if my_form.errors %}
             <p style="color:#940f29;">Incorrect Data, Check Again</p>
         {% endif %}
-        <form action="{% url 'CreatePost' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {% if post %}
+    <form action="{% url 'UpdatePost' post.id %}" method="POST" enctype="multipart/form-data">
+{% else %}
+    <form action="{% url 'CreatePost' %}" method="POST" enctype="multipart/form-data">
+{% endif %}
+    {% csrf_token %}
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group position-relative">
@@ -63,18 +68,22 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
-                        <input type="file" class="mb-2" style="color: white"  id="search-input-8" name="image_post">
-                        {% if form.errors.image %}
+                        <input type="file" class="mb-2" style="color: white"  id="search-input-8" name="image_post" value="{{ form.image_post.value }}">
+                        {% if form.errors.image_post %}
                             <div class="error-container">
-                                {% for error in form.errors.image %}
+                                {% for error in form.errors.image_post %}
                                     <p class="error-message text-left">{{ error }}</p>
                                 {% endfor %}
                             </div>
                         {% endif %}
                     </div>
-                    <div class="input-group-append text-center">
-                        <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Create Post</button>
-                    </div>
+                    {% if update == 1 %}
+                        <div class="input-group-append text-center">
+                            <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Update</button>
+                            {% else %}
+                            <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Create Post</button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </form>

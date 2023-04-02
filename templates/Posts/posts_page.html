@@ -184,29 +184,36 @@
 
 
     {% block content %}
-<!-- Cards Start -->
-<div class="container">
-  <div class="row row-cols-3 g-4">
-    {% for post in posts %}
-      <div class="col">
-        <div class="card mb-3" style="width: 22rem;">
-          <img src="{{ post.image_post.url }}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><b>{{ post.title|slice:":20" }}</b></h5>
-            <h6 class="card-subtitle mb-2 text-muted"><b>{{ post.subtitle|slice:":20" }}</b></h6>
-            <p class="card-text"><b>{{ post.description|slice:":65"}}</b></p>
-            <div style="display: flex; justify-content: space-between;">
-              <a href="{% url 'post' post_id=post.id %}" class="btn btn-primary">Read more...</a>
-              <p class="card-text"><small class="text-muted"><b>Posted by:</b> {{ post.user.username }}</small></p>
-            </div>
-          </div>
+    <!-- Cards Start -->
+    <div class="container">
+        <div class="row row-cols-3 g-4">
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card mb-3" style="width: 22rem;">
+                        {% if post.image_post %}
+                            <img src="{{ post.image_post.url }}" class="card-img-top" alt="...">
+                        {% else %}
+                            <img src="{% static 'AppEdukate/img/image_default.png' %}" class="card-img-top" alt="...">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title"><b>{{ post.title|slice:":20" }}</b></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><b>{{ post.subtitle|slice:":20" }}</b></h6>
+                            <p class="card-text"><b>{{ post.description|slice:":65"}}</b></p>
+                            <div>
+                                <p class="card-text" style="margin-bottom: 0;"><small class="text-muted"><b>Posted on:</b> {{ post.date_posted.day }} {{ post.date_posted|date:"F" }}, {{ post.date_posted.year }} at {{ post.date_posted|date:"h:i A" }}</small></p>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                                <a href="{% url 'post' post_id=post.id %}" class="btn btn-primary">Read more...</a>
+                                <p class="card-text"><small class="text-muted"><b>by:</b> {{ post.user.username }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-<!-- Cards End -->
-    {% endblock content %}
+    </div>
+    <!-- Cards End -->
+{% endblock content %}
 
 
     <!-- Footer Start -->
@@ -297,10 +304,10 @@
     <script src="{% static 'AppEdukate/lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="{% static 'AppEdukate/js/main.js' %}"></script>
+{#    <script src="{% static 'AppEdukate/js/main.js' %}"></script>#}
 </body>
 
 {#    <script src="{% static 'AppEdukate/js/main.js' %}"></script>#}
-{#<script src="{% static 'AppEdukate/js/bootstrap.min.js' %}"></script>#}
+<script src="{% static 'AppEdukate/js/bootstrap.min.js' %}"></script>
 </html>
 

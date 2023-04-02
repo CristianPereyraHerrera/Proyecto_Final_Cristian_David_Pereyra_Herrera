@@ -13,7 +13,59 @@
                 <p style="color: #111111; word-wrap: break-word;">{{ post.description }}</p>
             </div>
             <br>
+            <div>
+                <p>Posted on {{ post.date_posted.day }} {{ post.date_posted|date:"F" }}, {{ post.date_posted.year }} at {{ post.date_posted|date:"h:i A" }}</p>
+            </div>
             <p><small class="text-muted" style="font-weight: bold; font-size: 16px;">Posted by: <span style="font-size: 18px; color: #111111;">{{ post.user.username }}</span></small></p>
+            {% if user.is_superuser %}
+                {% if post.user == user %}
+                    <div style="display: flex; justify-content: center;">
+                        <form method="POST" action="{% url 'DeletePost' post.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary px-4">Delete</button>
+                        </form>
+                        <form method="POST" action="{% url 'UpdatePost' post.id %}" style="margin-left: 100px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary px-4">Update</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div style="display: flex; justify-content: center;">
+                        <form method="POST" action="{% url 'DeletePost' post.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary px-4">Delete</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% elif user.is_staff %}
+                {% if post.user == user %}
+                    <div style="display: flex; justify-content: center;">
+                        <form method="POST" action="{% url 'DeletePost' post.id %}" style="margin-right: 100px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary px-4">Delete</button>
+                        </form>
+                        <form method="POST" action="{% url 'UpdatePost' post.id %}" style="margin-left: 100px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary px-4">Update</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <p>You don't have permission to delete or update this post.</p>
+                {% endif %}
+            {% else %}
+                {% if request.user == post.user %}
+                    <div style="display: flex; justify-content: center;">
+                        <form method="POST" action="{% url 'DeletePost' post.id %}" style="margin-right: 100px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary px-4">Delete</button>
+                        </form>
+                        <form method="POST" action="{% url 'UpdatePost' post.id %}" style="margin-left: 100px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary px-4">Update</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>
