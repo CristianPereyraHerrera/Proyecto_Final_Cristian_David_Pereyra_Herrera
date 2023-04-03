@@ -33,6 +33,46 @@
             <div class="mx-auto mb-5" style="width: 100%; max-width: 60%;">
                 <div class="mx-auto mb-5 d-flex flex-column align-items-center" style="width: 100%; max-width: 60%;">
                     <div class="input-group position-relative">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Edit First Name" id="search-input-1" name="first_name" value="{{ my_form.first_name.value }}">
+                        {% if my_form.errors.first_name %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.first_name %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Edit Last Name" id="search-input-2" name="last_name" value="{{ my_form.last_name.value }}">
+                        {% if my_form.errors.last_name %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.last_name %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <textarea class="form-control border-light mb-1" style="padding: 15px 15px;" placeholder="Edit Description" id="search-input-3" name="description" rows="5" cols="50">{{ my_form.description.value }}</textarea>
+                        {% if my_form.errors.description %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.description %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
+                        <input type="url" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Edit Web Site" id="search-input-4" name="website" value="{{ my_form.website.value }}">
+                        {% if my_form.errors.website %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.website %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
                         <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Edit Username" id="search-input-5" name="username" value="{{ my_form.username.value }}">
                         {% if user_form.errors.username %}
                             <div class="error-container">
@@ -53,7 +93,7 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
-                        <input type="file" class="mb-2" style="color: white"  id="search-input-8" name="image">
+                        <input type="file" class="mb-2" style="color: white"  id="search-input-7" name="image" value="{{ accounts.image }}">
                         {% if form.errors.image %}
                             <div class="error-container">
                                 {% for error in form.errors.image %}
@@ -63,7 +103,7 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
-                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password">
+                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-8" name="password">
                         {% if password_form.errors.new_password %}
                             <div class="error-container">
                                 {% for error in password_form.errors.new_password %}
@@ -72,26 +112,6 @@
                             </div>
                         {% endif %}
                     </div>
-{#                    <div class="input-group position-relative">#}
-{#                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password1">#}
-{#                        {% if my_form.errors.password %}#}
-{#                            <div class="error-container">#}
-{#                                {% for error in my_form.errors.password %}#}
-{#                                    <p class="error-message text-left">{{ error }}</p>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                    <div class="input-group position-relative">#}
-{#                        <input type="password" class="form-control border-light mb-2" style="padding: 25px 15px;" placeholder="Password" id="search-input-7" name="password2">#}
-{#                        {% if my_form.errors.password %}#}
-{#                            <div class="error-container">#}
-{#                                {% for error in my_form.errors.password %}#}
-{#                                    <p class="error-message text-left">{{ error }}</p>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                    </div>#}
                     <div class="input-group-append text-center">
                         <button type="submit" class="btn btn-secondary mb-3 px-4 px-lg-5">Edit Profile</button>
                     </div>

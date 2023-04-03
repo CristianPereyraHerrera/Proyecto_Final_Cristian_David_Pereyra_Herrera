@@ -5,13 +5,18 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
-from accounts.forms import UserRegisterForm
-from accounts.models import Avatar
+from .forms import UserRegisterForm
+from .models import Avatar
 
 
 @login_required()
 def edit_user(request):
     user = request.user
+    try:
+        avatar = Avatar.objects.get(user=user)
+    except Avatar.DoesNotExist:
+        avatar = None
+
     if request.method == "POST":
         my_form = UserRegisterForm(request.POST, request.FILES)
         if my_form.is_valid():
@@ -19,31 +24,45 @@ def edit_user(request):
             if check_password(information["password"], user.password):
                 user.username = information["username"]
                 user.email = information["email"]
+                user.first_name = information["first_name"]
+                user.last_name = information["last_name"]
+                user.save()
 
-                try:
-                    user.avatar.image = information["image"]
-                except:
-                    avatar = Avatar(user=user, image=information["image"])
-                    avatar.save()
+                if avatar is None:
+                    avatar = Avatar.objects.create(user=user, image=None, description=None, website=None)
+
+                avatar.image = information['image']
+                avatar.description = information['description']
+                avatar.website = information['website']
+                avatar.save()
 
                 success_message = "Account Edited Successful!"
                 messages.success(request, success_message)
-                user.save()
+
                 logout(request)
-                if messages.success:
-                    context = {
-                        "title": "Edit Account",
-                        "redirect": ('loginAccount')
-                    }
-                    return render(request, "accounts/logout.html", context=context)
+
+                context = {
+                    "title": "Edit Account",
+                    "redirect": ('loginAccount')
+                }
+                return render(request, "accounts/logout.html", context=context)
             else:
                 messages.error(request, 'password invalid')
         else:
             messages.error(request, 'Please correct the errors below.')
-    my_form = UserRegisterForm(initial={
-        "username": user.username,
-        "email": user.email
-    })
+    else:
+        my_form = UserRegisterForm(initial={
+            "username": user.username,
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        })
+
+        if avatar is not None:
+            my_form.fields['image'].initial = avatar.image
+            my_form.fields['description'].initial = avatar.description
+            my_form.fields['website'].initial = avatar.website
+
     context = {
         "my_form": my_form
     }

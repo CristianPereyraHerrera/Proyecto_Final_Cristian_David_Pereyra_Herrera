@@ -6,7 +6,6 @@ from .forms import PostForm
 
 
 # Create your views here.
-
 @login_required
 def home(request):
     posts = Post.objects.all()
@@ -67,33 +66,20 @@ def update_post(request, post_id):
     return render(request, 'Posts/form_post.html', context=context)
 
 
+
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 @login_required
-def delete_own_post(request, post_id):
+def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    if request.user == post.user:
+    if request.user.is_superuser:
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+    elif request.user.is_staff and not post.user.is_superuser:
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+    elif request.user == post.user:
         post.delete()
         messages.success(request, 'Post deleted successfully!')
     else:
         messages.error(request, 'You are not authorized to delete this post.')
-    return redirect('home')
-
-
-@user_passes_test(lambda u: u.groups.filter(name='staff').exists() and u.has_perm('appname.delete_post'))
-@login_required
-def delete_staff_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    if request.user.is_staff and (not post.user.is_superuser):
-        post.delete()
-        messages.success(request, 'Post deleted successfully!')
-    else:
-        messages.error(request, 'You are not authorized to delete this post.')
-    return redirect('home')
-
-
-@user_passes_test(lambda u: u.is_superuser)
-@login_required
-def delete_any_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    post.delete()
-    messages.success(request, 'Post deleted successfully!')
     return redirect('home')
