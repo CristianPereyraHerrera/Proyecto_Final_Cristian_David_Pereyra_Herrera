@@ -569,6 +569,7 @@ cython_debug/
 
 # Excluir carpetas del proyecto local
 media/
+staticfiles/
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
