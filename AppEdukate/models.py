@@ -12,18 +12,18 @@ class Course(models.Model):
 
 class Assignment(models.Model):
     first_name = models.CharField(max_length=30)
-    second_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
-    second_last_name = models.CharField(max_length=30, blank=True, null=True)
     course = models.CharField(max_length=30)
+    link_assignment = models.URLField(max_length=200)
     commission = models.IntegerField()
     assignment_date = models.DateField()
     assignment = models.BooleanField()
 
     def __str__(self):
-        return f"Assignment: {self.first_name} {self.second_name} {self.last_name} {self.second_last_name} " \
-               f"----- Course: {self.course} ----- Commission: {self.commission} " \
-               f"----- Assignment the day: {self.assignment_date} ----- Assignment: {self.assignment}"
+        return f"Assignment: {self.first_name} {self.last_name}" \
+               f"----- Course: {self.course} ----- Link Assignment: {self.link_assignment} " \
+               f"----- Commission: {self.commission} ----- Assignment the day: {self.assignment_date} " \
+               f"----- Assignment: {self.assignment}"
 
 
 class Student(models.Model):

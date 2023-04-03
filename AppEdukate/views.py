@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from collections import defaultdict
 from AppEdukate.models import Course, Student, Assignment
 from AppEdukate.forms import Form_courses, Form_students, Form_assignment
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 
 
@@ -121,7 +121,10 @@ def search_students(request):
 
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def form_courses(request):
+    if not request.user.is_superuser and not request.user.is_staff:
+        return redirect('AppEdukateIndex')
     if request.method == 'POST':
         min_length = 3
         my_form = Form_courses(request.POST)
@@ -217,6 +220,7 @@ def form_assignment(request):
         if my_form.is_valid() \
                 and len(my_form.cleaned_data['first_name']) >= min_length \
                 and len(my_form.cleaned_data['last_name']) >= min_length \
+                and len(my_form.cleaned_data['link_assignment']) >= min_length \
                 and len(my_form.cleaned_data['course']) >= min_length:
             information = my_form.cleaned_data
             course_name = information['course'].lower()
@@ -231,6 +235,7 @@ def form_assignment(request):
             if course_exists:
                 assignment = Assignment(first_name=information['first_name'].lower(),
                                         last_name=information['last_name'].lower(),
+                                        link_assignment=information['link_assignment'].lower(),
                                         course=course_name,
                                         commission=commission,
                                         assignment_date=information['assignment_date'],
@@ -252,6 +257,11 @@ def form_assignment(request):
                 my_form.add_error('last_name', 'This field is required.')
             elif len(my_form.cleaned_data['last_name']) < min_length:
                 my_form.add_error('last_name', f'The last name must have more than {min_length} characters')
+
+            if not my_form.cleaned_data.get('link_assignment'):
+                my_form.add_error('link_assignment', 'This field is required.')
+            elif len(my_form.cleaned_data['link_assignment']) < min_length:
+                my_form.add_error('link_assignment', f'The link assignment must have more than {min_length} characters')
 
             if not my_form.cleaned_data.get('course'):
                 my_form.add_error('course', 'This field is required.')

@@ -53,6 +53,16 @@
                         {% endif %}
                     </div>
                     <div class="input-group position-relative">
+                        <input type="url" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Link Assignment" id="search-input-2" name="link_assignment">
+                        {% if my_form.errors.link_assignment %}
+                            <div class="error-container">
+                                {% for error in my_form.errors.link_assignment %}
+                                    <p class="error-message text-left">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group position-relative">
                         <input type="text" class="form-control border-light mb-1" style="padding: 25px 15px;" placeholder="Enter Course" id="search-input-3" name="course">
                         {% if my_form.errors.course %}
                             <div class="error-container">

@@ -9,6 +9,7 @@ from .forms import UserRegisterForm
 from .models import Avatar
 
 
+# Create your views here.
 @login_required()
 def edit_user(request):
     user = request.user
@@ -80,9 +81,6 @@ def register_account(request):
         "my_form": my_form
     }
     return render(request, "AppEdukate/form_students.html", context=context)
-
-
-# Create your views here.
 
 
 @user_passes_test(lambda u: not u.is_authenticated, login_url='AppEdukateIndex', redirect_field_name=None)
