@@ -2,7 +2,6 @@ from django.urls import path
 from AppEdukate.views import index, about, detail, feature, team, testimonial, contact, search_courses, \
     search_students, form_courses, form_students, form_assignment, courses_avaibles, page_not_avaible
 
-
 urlpatterns = [
     path('', index, name="AppEdukateIndex"),
     path('about/', about, name="AppEdukateAbout"),

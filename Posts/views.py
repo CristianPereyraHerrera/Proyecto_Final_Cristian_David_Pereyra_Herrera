@@ -62,9 +62,8 @@ def update_post(request, post_id):
         'title': "Update Post",
         'update': 1,
         'post': post
-        }
+    }
     return render(request, 'Posts/form_post.html', context=context)
-
 
 
 @user_passes_test(lambda u: u.is_superuser or u.is_staff)

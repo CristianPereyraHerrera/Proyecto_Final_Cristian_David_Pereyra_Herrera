@@ -108,7 +108,8 @@ def search_students(request):
     if message_error:
         return render(request, "AppEdukate/search_students.html", {'message_error': message_error})
     elif students.exists():
-        return render(request, "AppEdukate/search_students.html", {'students': students, 'last_name': last_name, 'email': email, 'message_error': message_error})
+        return render(request, "AppEdukate/search_students.html",
+                      {'students': students, 'last_name': last_name, 'email': email, 'message_error': message_error})
     else:
         message_error = "No results found"
         return render(request, "AppEdukate/search_students.html", {'message_error': message_error})
@@ -239,7 +240,8 @@ def form_assignment(request):
                 return render(request, "AppEdukate/redirect_forms.html", {"success_message": success_message})
             else:
                 error_message = "Course and commission do not match."
-                return render(request, "AppEdukate/form_assignment.html", {"my_form": my_form, "error_message": error_message})
+                return render(request, "AppEdukate/form_assignment.html",
+                              {"my_form": my_form, "error_message": error_message})
         else:
             if not my_form.cleaned_data.get('first_name'):
                 my_form.add_error('first_name', 'This field is required.')
