@@ -23,4 +23,5 @@ urlpatterns = [
     path('Edukate/', include('AppEdukate.urls')),
     path('accounts/', include('accounts.urls')),
     path('', include('Posts.urls')),
+    path('', include('SystemMessages.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

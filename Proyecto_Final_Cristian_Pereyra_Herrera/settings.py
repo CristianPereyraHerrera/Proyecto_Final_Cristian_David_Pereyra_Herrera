@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'AppEdukate',
     'accounts',
     'Posts.apps.PostsConfig',
+    'SystemMessages'
 ]
 
 MIDDLEWARE = [

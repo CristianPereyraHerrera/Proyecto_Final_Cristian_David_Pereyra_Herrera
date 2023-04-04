@@ -21,10 +21,10 @@ class Form_students(forms.Form):
 class Form_assignment(forms.Form):
     first_name = forms.CharField(max_length=30, required=True,
                                  error_messages={'required': 'Please enter your first name.'})
-    second_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=True,
                                 error_messages={'required': 'Please enter your last name.'})
-    second_last_name = forms.CharField(max_length=30, required=False)
+    link_assignment = forms.URLField(max_length=200, required=True,
+                                error_messages={'required': 'Please enter your last name.'})
     course = forms.CharField(required=True, error_messages={'required': 'Please enter your course.'})
     commission = forms.IntegerField(required=True, error_messages={'required': 'Please enter your commission.'})
     assignment_date = forms.DateField(input_formats=['%d/%m/%Y'], required=True,

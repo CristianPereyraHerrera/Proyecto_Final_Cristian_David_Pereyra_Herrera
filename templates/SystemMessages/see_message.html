@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+
+{% block Header %}
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">Send Message</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Send Message</p>
+            </div>
+            <h2>Sent messages</h2>
+            <table class="table" style="color: white">
+                <thead>
+                <tr>
+                    <th>Recipient</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for message in sent_messages %}
+                    <tr>
+                        <td>{{ message.user_receiver }}</td>
+                        <td>{{ message.content }}</td>
+                        <td>{{ message.date_posted }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">There are no messages sent.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+            <h2>Received messages</h2>
+            <table class="table" style="color: white">
+                <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for message in received_messages %}
+                    <tr>
+                        <td>{{ message.user_sender }}</td>
+                        <td>{{ message.content }}</td>
+                        <td>{{ message.date_posted }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No messages received.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block About %}
+{% endblock %}
+
+
+{% block Feature %}
+{% endblock %}
+
+
+{% block Courses %}
+{% endblock %}
+
+
+{% block Team %}
+{% endblock %}
+
+
+{% block Testimonial %}
+{% endblock %}
+
+
+{% block Contact %}
+{% endblock %}
