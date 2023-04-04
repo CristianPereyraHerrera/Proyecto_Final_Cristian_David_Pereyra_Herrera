@@ -82,7 +82,7 @@ def search_students(request):
     last_name = request.GET.get('last_name')
     email = request.GET.get('email')
     min_length = 3
-    students = Student.objects.all()
+    students = User.objects.all()
     message_error = ""
     if not first_name and not last_name and not email and not request.GET:
         return render(request, "AppEdukate/search_students.html")

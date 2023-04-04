@@ -1,8 +1,10 @@
 from django.urls import path
-from SystemMessages.views import inbox, send_message, see_message
+from SystemMessages.views import send_message, see_message, delete_message
+
 
 urlpatterns = [
-    path('messages/', inbox, name='Messages'),
+    path('messages/', see_message, name='SeeMessage'),
     path('messages/send_message/', send_message, name='SendMessage'),
-    path('messages/see_message/', see_message, name='SeeMessage'),
+    path('messages/send-message/<str:user_username>/', send_message, name='ReSendMessage'),
+    path('messages/delete/<int:message_id>/', delete_message, name='DeleteMessage')
 ]

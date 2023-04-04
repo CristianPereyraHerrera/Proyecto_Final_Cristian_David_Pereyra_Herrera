@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
+
 class MessageForm(forms.Form):
     user_username = forms.CharField(label='Recipient username')
     content = forms.CharField(widget=forms.Textarea)

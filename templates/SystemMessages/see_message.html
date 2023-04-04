@@ -1,14 +1,26 @@
 {% extends 'index.html' %}
 
+
 {% block Header %}
     <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
         <div class="container text-center py-5">
-            <h1 class="text-white display-1">Send Message</h1>
+            <h1 class="text-white display-1">See Message</h1>
             <div class="d-inline-flex text-white mb-5">
                 <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'AppEdukateIndex' %}">Home</a></p>
                 <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Send Message</p>
+                <p class="m-0 text-uppercase">See Message</p>
             </div>
+            <div class="text-center mb-3">
+                <a href="{% url 'SendMessage' %}" class="btn btn-secondary py-2 px-2 d-none d-lg-block"
+                   style="width: 200px; margin: 0 auto;">Send Message</a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <h2>Sent messages</h2>
             <table class="table" style="color: white">
                 <thead>
@@ -16,18 +28,26 @@
                     <th>Recipient</th>
                     <th>Content</th>
                     <th>Date</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
+                <tbody>
                 <tbody>
                 {% for message in sent_messages %}
                     <tr>
                         <td>{{ message.user_receiver }}</td>
                         <td>{{ message.content }}</td>
                         <td>{{ message.date_posted }}</td>
+                        <td>
+                            <form action="{% url 'DeleteMessage' message.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="3">There are no messages sent.</td>
+                        <td colspan="4">There are no messages sent.</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -40,6 +60,7 @@
                     <th>Sender</th>
                     <th>Content</th>
                     <th>Date</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,10 +69,9 @@
                         <td>{{ message.user_sender }}</td>
                         <td>{{ message.content }}</td>
                         <td>{{ message.date_posted }}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="3">No messages received.</td>
+                        <td>
+                            <a href="{% url 'ReSendMessage' message.id %}" class="btn btn-secondary btn-sm">Reply</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

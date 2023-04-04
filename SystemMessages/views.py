@@ -1,33 +1,32 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from .forms import MessageForm
 from .models import Message
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 @login_required
-def inbox(request):
-    return render(request, 'SystemMessages/messages.html')
-
-
-@login_required
-def send_message(request):
-    form = MessageForm()
+def send_message(request, user_username=None):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['user_username']
+            username = request.POST.get('user_username')
             content = form.cleaned_data['content']
             user_receiver = User.objects.filter(username=username).first()
-            message = Message(user_sender=request.user, user_receiver=user_receiver, content=content)
-            message.save()
-            messages.success(request, 'Message sent successfully.')
-            return redirect('SendMessage')
+            message = Message(user_sender=request.user, content=content)
+            if user_receiver:
+                message.user_receiver = user_receiver
+                message.save()
+                messages.success(request, 'Message sent successfully.')
+                return redirect('SendMessage')
+    else:
+        form = MessageForm()
 
     context = {
-        'form': form
+        'form': form,
+        'user_username': user_username
     }
     return render(request, 'SystemMessages/send_message.html', context=context)
 
@@ -43,3 +42,15 @@ def see_message(request):
     }
     return render(request, 'SystemMessages/see_message.html', context=context)
 
+
+@login_required
+def delete_message(request, message_id):
+    try:
+        message = Message.objects.get(id=message_id, user_sender=request.user)
+    except Message.DoesNotExist:
+        messages.error(request, 'The message you are trying to delete does not exist or you do not have permission to delete it.')
+        return redirect('SendMessage')
+
+    message.delete()
+    messages.success(request, 'The message was successfully deleted.')
+    return redirect('SeeMessage')
