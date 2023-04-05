@@ -66,7 +66,7 @@ def update_post(request, post_id):
     return render(request, 'Posts/form_post.html', context=context)
 
 
-@user_passes_test(lambda u: u.is_superuser or u.is_staff)
+@user_passes_test(lambda u: u.is_superuser or u.is_staff or u)
 @login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
